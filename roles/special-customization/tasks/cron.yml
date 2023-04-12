@@ -1,0 +1,8 @@
+---
+- name: Copy custom cron file to /etc/cron.d
+  ansible.builtin.template:
+    src: crontab.j2
+    dest: /etc/crontab
+    owner: root
+    group: root
+    mode: '0644'

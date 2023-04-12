@@ -1,0 +1,15 @@
+---
+- name: Update repositories cache
+  become: yes
+  ansible.builtin.apt:
+    update_cache: yes
+  when: install_desktop == "only-gnome" or install_desktop == "all"
+  tags:
+    - install-desktop
+
+- name: Install GNOME desktop
+  become: yes
+  ansible.builtin.import_tasks: gnome-install.yml
+  when: install_desktop == "only-gnome" or install_desktop == "all"
+  tags:
+    - install-desktop

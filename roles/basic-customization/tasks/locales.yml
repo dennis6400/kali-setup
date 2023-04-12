@@ -1,0 +1,13 @@
+---
+- name: Ensure a locale exists
+  ansible.builtin.locale_gen:
+    name: de_DE.UTF-8
+    state: present
+
+- name: Rollout locale file
+  ansible.builtin.template:
+    src: locale.j2
+    dest: /etc/default/locale
+    owner: root
+    group: root
+    mode: '0644'

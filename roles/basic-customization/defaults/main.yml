@@ -1,0 +1,17 @@
+---
+##
+# Setup German keyboard layout (system-wide)
+## 
+setup_german_keyboard: no
+
+
+##
+# Setup German locales
+##
+setup_german_locales: no
+
+
+##
+# Setup German timezone
+##
+setup_german_timezone: no

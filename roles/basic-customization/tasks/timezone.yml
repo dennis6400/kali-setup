@@ -1,0 +1,4 @@
+---
+- name: Set timezone to Europe/Berlin
+  ansible.builtin.timezone:
+    name: Europe/Berlin

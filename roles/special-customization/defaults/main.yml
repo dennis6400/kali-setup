@@ -1,0 +1,75 @@
+---
+##
+# Configure User 
+##
+user: "kali"
+group: "{{ user }}"
+home_dir: "/home/{{ user }}"
+
+
+##
+# Setup Hosts file
+##
+setup_hosts: no
+hosts_template: "hosts.j2"
+
+
+##
+# Setup Shell
+##
+setup_shell: no
+setup_shell_aliases: no
+setup_root_shell: no
+shell: "bash"
+shell_profile_template: "{{ shell }}rc-example.j2"
+shell_alias_files: 
+  - { template: "{{ shell }}_aliases-example.j2", dest: ".{{ shell }}_aliases" }
+
+
+##
+# Setup Oracle instant client
+##
+install_oracle_instant_client: no
+
+
+##
+# Setup Sublime Text
+##
+install_sublime_text: no
+
+
+##
+# Kali runs in a VMware VM
+##
+vmware_vm: yes
+
+
+##
+# Setup Sudoers
+##
+setup_sudoers: no
+
+
+##
+# Setup (system-wide) Cron
+##
+setup_cron: no
+
+
+##
+# Misc Customization
+##
+setup_misc: no
+
+# Project Directories
+project_root_dir: "{{ home_dir }}/projects"
+project_local_dir: "{{ project_root_dir }}/local"
+
+# Engagement Directory
+setup_engangement_dir: no
+
+# VMware: Host Directories
+setup_symlinks_host_dirs: no
+
+# Private Utils
+private_utils: no

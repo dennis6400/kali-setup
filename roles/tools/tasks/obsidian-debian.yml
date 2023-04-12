@@ -1,0 +1,14 @@
+---
+- name: Download the Obsidian .deb package
+  ansible.builtin.get_url:
+    url: "https://github.com/obsidianmd/obsidian-releases/releases/download/v{{ obsidian_version }}/obsidian_{{ obsidian_version }}_amd64.deb"
+    dest: "/tmp"
+
+- name: Install the Obsidian .deb package
+  ansible.builtin.apt:
+    deb: "/tmp/obsidian_{{ obsidian_version }}_amd64.deb"
+
+- name: Remove the Obsidian .deb package
+  ansible.builtin.file:
+    path: "/tmp/obsidian_{{ obsidian_version }}_amd64.deb"
+    state: absent

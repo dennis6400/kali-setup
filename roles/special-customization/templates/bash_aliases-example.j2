@@ -1,0 +1,106 @@
+##
+# Basic Aliases
+##
+
+# ls
+alias ll='ls -l'
+alias la='ls -al'
+alias lt='ls -lt'
+alias ltr='ls -ltr'
+alias l1='ls -1'
+
+# ls with grep
+alias llg='ls -l | grep'
+alias lag='ls -la | grep'
+alias ltg='ls -lt | grep'
+alias ltrg='ls -ltr | grep'
+alias l1g='ls -1 | grep'
+
+# cd
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+
+# cd - common directories
+alias cddoc='cd ~/Documents'
+alias cddesk='cd ~/Desktop'
+alias cddown='cd ~/Downloads'
+alias cdssh='cd ~/.ssh'
+alias cdopt='cd /opt'
+alias cdtmp='cd /tmp'
+alias cdlog='cd /var/log'
+
+# bash history
+alias h='history'
+alias hg='history | grep'
+alias ha='history -a'
+alias hr='history -r'
+alias ht='history | tail -40'
+
+# environment
+alias envg='env | grep'
+
+## timestamps
+alias curdate="date '+%Y-%m-%d_%H%M'"
+alias curdate2="date '+%Y-%m-%d_%H%M%S'"
+
+# ps (processes)
+alias pa='ps aux'
+alias pag='ps aux | grep'
+
+# netstat & ss
+alias ns='netstat -tulpen'
+alias nsg='netstat -tulpen | grep'
+alias ssn='ss -tulpen'
+alias ssng='ss -tulpen | grep'
+
+# aliases
+alias a='alias'
+alias ag='alias | grep'
+alias nalias='nano ~/.bash_aliases'
+{% if setup_sublime_text %}
+alias salias='subl ~/.bash_aliases'
+{% endif %}
+alias lalias='. ~/.bash_aliases'
+alias balias='cp ~/.bash_aliases ~/.bash_aliases_$(date '+%Y-%m-%d_%H%M%S').bak'
+
+# Bash
+alias nbash='nano ~/.bashrc'
+alias sbash='subl ~/.bashrc'
+alias lbash='. ~/.bashrc'
+alias bbash='cp ~/.bashrc ~/.bashrc_$(date '+%Y-%m-%d_%H%M%S').bak'
+
+# hosts file
+alias nhosts='sudo nano /etc/hosts'
+{% if setup_sublime_text %}
+alias shosts='sudo subl /etc/hosts'
+{% endif %}
+alias bhosts='sudo cp /etc/hosts /etc/hosts_$(date '+%Y-%m-%d_%H%M%S').bak'
+
+
+##
+# Editors
+##
+
+# Nano
+alias n='nano'
+{% if setup_sublime_text %}
+
+# Sublime
+alias s='subl'
+{% endif %}
+
+
+##
+# Git
+##
+alias gsync='git pull && git push'
+
+
+##
+# Apt
+##
+alias upd='sudo apt update'
+alias upg='sudo apt upgrade -y'
+alias updg='sudo apt update && sudo apt upgrade -y'

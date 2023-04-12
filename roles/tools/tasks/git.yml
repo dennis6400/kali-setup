@@ -1,0 +1,15 @@
+---
+- name: Create a directory for each tool to be installed
+  ansible.builtin.file:
+    path: "{{ item.path }}/{{ item.dir_name }}"
+    #group: "{{ group }}"
+    #mode: 0755
+    state: directory
+  loop: "{{ git_repos }}"
+
+- name: Checkout tools from GitHub
+  ansible.builtin.git:
+    repo: "{{ item.repo }}"
+    dest: "{{ item.path }}/{{ item.dir_name }}"
+    #force: true
+  loop: "{{ git_repos }}"

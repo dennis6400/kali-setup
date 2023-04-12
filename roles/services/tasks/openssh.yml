@@ -1,0 +1,11 @@
+---
+- name: Install openssh server via paket manager
+  ansible.builtin.apt:
+    name: openssh-server
+    state: present
+
+- name: Start the openssh server make the service boot safe
+  ansible.builtin.systemd:
+    name: ssh
+    state: started
+    enabled: yes 

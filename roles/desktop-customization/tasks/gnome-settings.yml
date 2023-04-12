@@ -1,0 +1,13 @@
+---
+- name: Apply favorite apps in dash dock
+  ansible.builtin.shell: |
+    gsettings set org.gnome.shell favorite-apps "{{ gnome_favorite_apps }}"
+
+- name: Enable GNOME extensions
+  ansible.builtin.shell: |
+    gsettings set org.gnome.shell enabled-extensions "{{ gnome_extensions }}"
+
+- name: Apply further GNOME settings
+  ansible.builtin.shell: |
+    gsettings set {{ item.schema }} {{ item.key }} {{ item.value }}
+  loop: "{{ gnome_settings }}"

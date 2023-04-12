@@ -1,0 +1,87 @@
+---
+##
+# Configure User
+##
+user: "kali"
+group: "{{ user }}"
+home_dir: "/home/{{ user }}"
+
+
+##
+# Tools
+##
+
+# Apt packages to install
+apt_packages:
+  - curl 
+  - wget
+  - tree
+  - htop
+  - terminator
+  - dirb
+  - gobuster
+
+# Git repos
+git_repos:
+  - { path: "/opt", dir_name: "dirsearch", repo: "https://github.com/maurosoria/dirsearch.git" }
+  
+# Create SymLinks
+symlinks:
+  - { src: "/opt/dirsearch/dirsearch.py", dest: "/usr/local/bin/dirsearch" }   # Add dirsearch to PATH
+
+# Sublime Text & Sublime Merge
+install_sublime_text: no
+install_sublime_merge: no
+
+# Obsidian
+#install_obsidian: yes
+#obsidian_version: 1.1.16
+
+# Burp Suite
+install_burpsuite: no
+
+# Oracle instant client
+install_oracle_instant_client: no
+
+# Tools - Setup Terminator (terminator-config.j2)
+setup_terminator: no
+
+# Setup git (gitconfig.j2)
+setup_git: no
+
+
+##
+# Desktop - Installation & Customization
+##
+install_desktop: none
+setup_desktop: none
+
+
+##
+# Basic Customization
+##
+#setup_german_keyboard: yes
+#setup_german_locales: yes
+#setup_german_timezone: yes
+
+
+##
+# Special Customization
+##
+
+# Setup Hosts file
+#setup_hosts: yes
+
+# Setup Shell
+#setup_shell: yes
+#setup_shell_aliases: yes
+#setup_root_shell: yes
+
+# Kali runs in a VMware VM
+#vmware_vm: yes
+
+# Setup Sudoers
+#setup_sudoers: yes
+
+# Setup (system-wide) Cron
+#setup_cron: yes

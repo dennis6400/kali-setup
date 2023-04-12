@@ -1,0 +1,3 @@
+[kali-default]
+#192.168.xx.xx vmware_vm=yes # CHANGE THIS
+#192.169.xx.xx vmware_vm=no  # CHANGE THIS

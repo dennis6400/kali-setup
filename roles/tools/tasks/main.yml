@@ -1,0 +1,108 @@
+---
+##
+# Requirements
+##
+- set_fact:
+    architecture: "x86_64"
+    #architecture: "arm64"
+    os_family: "Debian"
+
+
+##
+# Install tools
+## 
+- name: Install apt packages
+  become: yes
+  ansible.builtin.import_tasks: apt.yml
+  when: apt_packages is defined
+  tags:
+    - install-apt-tools
+
+- name: Install tools from GitHub
+  become: yes
+  ansible.builtin.import_tasks: git.yml
+  when: git_repos is defined
+  tags:
+    - install-git-tools
+
+- name: Install Sublime Text and Sublime Merge
+  become: yes
+  ansible.builtin.import_tasks: sublime.yml
+  when: install_sublime_text or install_sublime_merge
+  tags:
+    - install-apt-tools
+
+- name: Install Obsidian (Debian package)
+  become: yes
+  ansible.builtin.import_tasks: obsidian-debian.yml
+  when: install_obsidian and os_family == "Debian" and architecture == "x86_64"
+  tags:
+    - install-apt-tools
+
+- name: Install Obsidian (AppImage) for ARM architecture
+  become: yes
+  ansible.builtin.import_tasks: obsidian-appimage.yml
+  vars:
+    obsidian_appimage_file: "Obsidian-{{ obsidian_version }}-arm64.AppImage"
+  when: install_obsidian and os_family == "Debian" and architecture == "arm64"
+  tags:
+    - install-further-tools
+
+- name: Install Oracle instant client
+  become: yes
+  ansible.builtin.import_tasks: oracle-instant-client.yml
+  vars:
+    oracle_instantclient_basic: "instantclient-basic-linux.x64-{{ oracle_instant_client_version }}.zip"
+    oracle_instantclient_sqlplus: "instantclient-sqlplus-linux.x64-{{ oracle_instant_client_version }}.zip"
+    oracle_instantclient_sdk: "instantclient-sdk-linux.x64-{{ oracle_instant_client_version }}.zip"
+    oracle_download_url_prefix: "https://download.oracle.com/otn_software/linux/instantclient/{{ oracle_instant_client_version | replace('.','') }}"
+  when: install_oracle_instant_client and os_family == "Debian" and architecture == "x86_64"
+  tags:
+    - install-further-tools
+
+- name: Install Burpsuite Professional
+  become: yes
+  ansible.builtin.import_tasks: burpsuite.yml
+  when: install_burpsuite
+  tags:
+    - install-further-tools
+
+
+###
+# Setup links
+##
+- name: Create symbolic links
+  become: yes
+  ansible.builtin.file:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    state: link
+  loop: "{{ symlinks }}"
+  when: symlinks is defined
+  ignore_errors: true   # Errors clould occur, when a package was not installed or a repo was not checked out
+
+
+###
+# Setup installed tools
+##
+- name: Gather the package facts
+  ansible.builtin.package_facts:
+    manager: auto
+
+- name: Rollout configurations
+  ansible.builtin.import_tasks: conf.yml
+  vars:
+    path: "/home/kali/.config/terminator"
+    template: "{{ terminator_template }}"
+    file_name: "config"
+  when: "setup_terminator and ('terminator' in ansible_facts.packages)"
+
+- name: Rollout configurations
+  ansible.builtin.import_tasks: conf.yml
+  vars:
+    path: "/home/kali"
+    template: "{{ git_template}}"
+    file_name: ".gitconfig"
+  when: "setup_git and ('git' in ansible_facts.packages)"

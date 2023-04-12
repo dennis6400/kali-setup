@@ -1,0 +1,35 @@
+---
+- name: Create Oracle root directory
+  ansible.builtin.file:
+    path: /opt/oracle
+    state: directory
+    owner: root
+    group: root
+
+- name: Download Oracle packages 
+  ansible.builtin.get_url:
+    url: "{{ item }}"
+    dest: "{{ oracle_root}}"
+  loop:
+    - "{{ oracle_download_url_prefix }}/{{ oracle_instantclient_basic }}"
+    - "{{ oracle_download_url_prefix }}/{{ oracle_instantclient_sqlplus }}"
+    - "{{ oracle_download_url_prefix }}/{{ oracle_instantclient_sdk }}"
+
+- name: Unarchive Oracle packages
+  ansible.builtin.unarchive:
+    src: "{{ item }}"
+    dest: "{{ oracle_root}}"
+    remote_src: yes
+  loop:
+    - "{{ oracle_root}}/{{ oracle_instantclient_basic }}"
+    - "{{ oracle_root}}/{{ oracle_instantclient_sqlplus }}"
+    - "{{ oracle_root}}/{{ oracle_instantclient_sdk }}"
+
+- name: Remove Oracle packages
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "{{ oracle_root}}/{{ oracle_instantclient_basic }}"
+    - "{{ oracle_root}}/{{ oracle_instantclient_sqlplus }}"
+    - "{{ oracle_root}}/{{ oracle_instantclient_sdk }}"

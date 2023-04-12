@@ -1,0 +1,43 @@
+---
+##
+# Sublime Text & Sublime Merge
+##
+install_sublime_text: no
+install_sublime_merge: no
+
+
+##
+# Obsidian
+##
+install_obsidian: yes
+obsidian_appimage_dest: "/opt/obsidian"
+obsidian_version: 1.1.16
+
+
+##
+# Oracle instant client
+##
+install_oracle_instant_client: no
+oracle_root: "/opt/oracle"
+oracle_home: "{{ oracle_root }}/instantclient_21_1"
+oracle_instant_client_version: "21.1.0.0.0"
+
+
+##
+# Burp Suite
+##
+install_burpsuite: no
+
+
+##
+# Terminator (terminator-config.j2)
+##
+setup_terminator: no
+terminator_template: "terminator-config.j2"
+
+
+##
+# Git (gitconfig.j2)
+##
+setup_git: no
+git_template: "gitconfig.j2"

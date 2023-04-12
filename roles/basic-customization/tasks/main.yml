@@ -1,0 +1,21 @@
+---
+- name: Setup keyboard (default)
+  become: yes
+  ansible.builtin.import_tasks: keyboard.yml
+  when: setup_german_keyboard
+  tags:
+    - basic-setup
+
+- name: Setup locales
+  become: yes
+  ansible.builtin.import_tasks: locales.yml
+  when: setup_german_locales
+  tags:
+    - basic-setup
+
+- name: Setup timezone
+  become: yes
+  ansible.builtin.import_tasks: timezone.yml
+  when: setup_german_timezone
+  tags:
+    - basic-setup

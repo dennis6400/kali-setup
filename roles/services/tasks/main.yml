@@ -1,0 +1,20 @@
+---
+- name: Update repositories cache
+  become: yes
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: Install & setup openssh server
+  become: yes
+  ansible.builtin.import_tasks: openssh.yml
+  when: setup_ssh_server
+
+- name: Install & setup ftp server
+  become: yes
+  ansible.builtin.import_tasks: pure-ftp.yml
+  when: setup_ftp_server
+
+- name: Install & setup tftp server
+  become: yes
+  ansible.builtin.import_tasks: atftp.yml
+  when: setup_tftp_server

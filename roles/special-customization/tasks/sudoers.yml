@@ -1,0 +1,8 @@
+---
+- name: Copy custom sudoers file to /etc/sudoers.d
+  ansible.builtin.template:
+    src: kali-custom-sudoers.j2
+    dest: /etc/sudoers.d/kali-custom
+    owner: root
+    group: root
+    mode: '0440'

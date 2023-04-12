@@ -1,0 +1,17 @@
+---
+- name: Install kali wallpapers
+  become: yes
+  ansible.builtin.apt:
+    name: kali-wallpapers-all
+    state: present
+    update_cache: yes
+  tags:
+    - setup-desktop
+
+- name: Setup GNOME desktop
+  ansible.builtin.import_tasks: gnome-settings.yml
+  when: setup_desktop == "only-gnome" or setup_desktop == "all"
+  #when: "(setup_desktop == 'only-gnome' or setup_desktop == 'all') and ('git' in ansible_facts.packages)"
+  #when: 'git' in ansible_facts.packages
+  tags:
+    - setup-desktop

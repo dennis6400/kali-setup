@@ -1,0 +1,10 @@
+---
+- name: Create a directory for the corresponding configuration (if it does not exist)
+  ansible.builtin.file:
+    dest: "{{ path }}"
+    state: directory
+
+- name: Copy template to destination directory
+  ansible.builtin.template:
+    src: "{{ template }}"
+    dest: "{{ path }}/{{ file_name }}"

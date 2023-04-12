@@ -1,0 +1,31 @@
+---
+- name: Setup {{ shell }} as login shell for {{ user }}
+  ansible.builtin.user:
+    name: "{{ user }}"
+    shell: "/bin/{{ shell }}"
+  when: setup_shell
+  tags:
+    - setup-shell-profile
+
+- name: Copy {{ shell }} aliases to {{ user }}'s home directory
+  ansible.builtin.template:
+    src: "{{ item.template }}"
+    dest: "{{ home_dir }}/{{ item.dest }}"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: '0644'
+  loop: "{{ shell_alias_files }}"
+  when: setup_shell_aliases
+  tags:
+    - setup-shell-aliases
+
+- name: Copy {{ shell }} profile to {{ user }}'s home directory
+  ansible.builtin.template:
+    src: "{{ shell_profile_template }}"
+    dest: "{{ home_dir }}/.{{ shell }}rc"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: '0644'
+  when: setup_shell
+  tags:
+    - setup-shell-profile

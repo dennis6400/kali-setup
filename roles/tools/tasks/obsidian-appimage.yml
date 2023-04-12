@@ -1,0 +1,30 @@
+---
+- name: Remove previous installations
+  ansible.builtin.file:
+    path: "{{ obsidian_appimage_dest }}"
+    state: absent
+
+- name: Create Obsidian directory
+  ansible.builtin.file:
+    path: "{{ obsidian_appimage_dest }}"
+    owner: root
+    group: root
+    state: directory
+
+- name: Download the Obsidian AppImage
+  ansible.builtin.get_url:
+    url: "https://github.com/obsidianmd/obsidian-releases/releases/download/v{{ obsidian_version }}/{{ obsidian_appimage_file }}"
+    dest: "{{ obsidian_appimage_dest }}"
+
+- name: Change file ownership, group and permissions
+  ansible.builtin.file:
+    path: "{{ obsidian_appimage_dest }}/{{ obsidian_appimage_file }}"
+    mode: '0755'
+
+- name: Add Obsidian to PATH
+  ansible.builtin.file:
+    src: "{{ obsidian_appimage_dest }}/{{ obsidian_appimage_file }}"
+    dest: "/usr/local/bin/obsidian"
+    owner: root
+    group: root
+    state: link

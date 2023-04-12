@@ -1,0 +1,47 @@
+---
+- set_fact:
+    setup_sublime_text: "{{ install_sublime_text }}"
+    setup_oracle_instant_client: "{{ install_oracle_instant_client }}"
+    setup_vmware: "{{ vmware_vm }}"
+    setup_private_utils: "{{ private_utils }}"
+  tags:
+    - setup-shell-profile
+    - setup-shell-aliases
+    - setup-misc
+
+- name: Setup host file
+  become: yes
+  ansible.builtin.import_tasks: hosts.yml
+  when: setup_hosts
+  tags:
+    - setup-hosts
+
+- name: Setup {{ shell }}
+  become: yes
+  ansible.builtin.import_tasks: shell.yml
+  when: user != "root"
+
+- name: Setup root {{ shell }}
+  become: yes
+  ansible.builtin.import_tasks: shell.yml
+  vars:
+    user: "root"
+    group: "root"
+    home_dir: "/root"
+  when: setup_root_shell
+
+- name: Setup cron
+  become: yes
+  ansible.builtin.import_tasks: cron.yml
+  when: "setup_cron and setup_vmware"
+
+- name: Setup sudoers
+  become: yes
+  ansible.builtin.import_tasks: sudoers.yml
+  when: "setup_sudoers and setup_vmware"
+
+- name: Miscellaneous customization 
+  ansible.builtin.import_tasks: misc.yml
+  when: setup_misc
+  tags:
+    - setup-misc

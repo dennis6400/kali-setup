@@ -1,0 +1,13 @@
+---
+- name: Install advanced TFTP server
+  ansible.builtin.apt:
+    name: atftp 
+    state: present
+
+- name: Create a symbolic link in / to the TFTP root directory
+  ansible.builtin.file:
+    src: /srv/tftp
+    dest: /tftp
+    owner: root
+    group: root
+    state: link

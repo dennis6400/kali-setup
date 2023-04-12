@@ -1,0 +1,17 @@
+---
+##
+# SSH Server
+##
+setup_ssh_server: no
+
+
+##
+# FTP Server
+##
+setup_ftp_server: no
+
+
+##
+# TFTP Server
+##
+setup_tftp_server: no

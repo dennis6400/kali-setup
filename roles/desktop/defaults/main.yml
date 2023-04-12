@@ -1,0 +1,10 @@
+---
+##
+# Install Desktop(s)
+##
+# -------------------------------------------
+# only-gnome => Install only GNOME
+# all        => Install all desktops
+# none       => Skip installing up desktop(s)
+# -------------------------------------------
+install_desktop: none

@@ -1,0 +1,8 @@
+---
+- name: Rollout keyboard file
+  ansible.builtin.template:
+    src: keyboard.j2
+    dest: /etc/default/keyboard
+    owner: root
+    group: root
+    mode: '0644'

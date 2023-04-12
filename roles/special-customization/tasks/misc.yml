@@ -1,0 +1,24 @@
+---
+- name: Create directory for local projects
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - "{{ project_root_dir }}"
+    - "{{ project_local_dir }}"
+
+- name: Setup engagement location (as folder)
+  ansible.builtin.file:
+    path: "{{ engangement_dir }}"
+    state: directory
+  when: not setup_vmware and setup_engangement_dir
+
+- name: Create symlinks to host directories (when Kali runs in a VM)
+  become: yes
+  ansible.builtin.file:
+    src: "{{ item.host_dir }}"
+    dest: "{{ item.dest }}"
+    state: link
+  loop: "{{ symlinks_host_dirs }}"
+  ignore_errors: yes   # Skip, when project directory already exists
+  when: setup_vmware and setup_symlinks_host_dirs
