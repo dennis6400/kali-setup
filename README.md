@@ -38,14 +38,14 @@ brew install ansible
 
 ## Usage
 ### Setup Inventory
-This playbook is intented to deploy a default environment on the kali hosts. In order to use this playbook efficently, it should be run against an inventory of kali hosts. This can be done by creating an inventory of hosts.
+This playbook is intented to deploy a default environment on the kali hosts. In order to use this playbook efficiently, it should be run against an inventory of kali hosts. This can be done by creating an inventory of hosts.
 
-To configure the hosts inventory, open and edit the file `kali-hosts` for including the hosts in the following manner:
+To configure the hosts inventory, open and edit the file `kali-default-hosts` for including the hosts in the following manner:
 
 ```yml
 [kali-default] # <- Group
-192.168.xx.xx vmware= 
-192.169.xx.xx
+192.168.xx.xx vmware_vm=yes # CHANGE THIS
+192.169.xx.xx vmware_vm=no  # CHANGE THIS
 ```
 
 *Inspired by https://github.com/hackedbyagirl/offensive-kali-ansible.*
@@ -72,7 +72,7 @@ The file `group_vars/template.yml` contains an example configuration and can be 
 cat group_vars/template.yml
 ```
 
-Configration changes should be done in the file `group_vars/kali-default.yml`:
+Configuration changes should be done in the file `group_vars/kali-default.yml`:
 
 ```shell
 nano group_vars/kali-default.yml
