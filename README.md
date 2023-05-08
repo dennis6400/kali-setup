@@ -1,5 +1,5 @@
 # Kali Setup
-This Ansible Playbook automates the setup of Kali machines used penetration tests. The containing Ansible roles automate the downloading & installation of additional tools for penetration testing, installing & customization furter desktop environments and setting up Kali itself. The playbook consists of the following roles:
+This Ansible Playbook automates the setup of Kali machines used penetration tests. The containing Ansible roles automate the downloading & installation of additional tools for penetration testing, installing & customization further desktop environments and setting up Kali itself. The playbook consists of the following roles:
 
 |Role|Description|
 |-|-|
