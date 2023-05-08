@@ -93,7 +93,7 @@ ssh-copy-id -i ~/.ssh/<private SSH key> kali@192.169.xx.xx
 **Step 01 -** Clone the repository:
 
 ```shell
-git clone https://github.com/dennis6400/kali-setup.git && cd kali-setup
+git clone git@github.com:dennis6400/kali-setup.git && cd kali-setup
 ```
 
 The command above clone the latest state (master branch) of the repository. Refer to [Alternative Downloads](#Alternative%20Downloads) for alternative downloads.
@@ -135,22 +135,22 @@ make skip-secrets
 ## Alternative Downloads
 ### Clone Master Branch
 ```shell
-git clone https://github.com/dennis6400/kali-setup.git
+git clone git@github.com:dennis6400/kali-setup.git
 ```
 
 ### Download Master Branch
-```shell
-wget https://github.com/dennis6400/kali-setup/archive/refs/heads/master.zip
+```
+https://github.com/dennis6400/kali-setup/archive/refs/heads/master.zip
 ```
 
 ### Clone Specific Branch/Tag/Release
 ```shell
-git clone --depth 1 --branch 1.0.0 https://github.com/dennis6400/kali-setup.git
+git clone --depth 1 --branch v1.0.0 git@github.com:dennis6400/kali-setup.git
 ```
 
 ### Download Specific Branch/Tag/Release
-```shell
-wget https://github.com/dennis6400/kali-setup/archive/refs/tags/v1.0.0.zip
+```
+https://github.com/dennis6400/kali-setup/archive/refs/tags/v1.0.0.zip
 ```
 
 ## Advanced Usage
