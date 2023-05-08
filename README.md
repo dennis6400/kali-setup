@@ -5,7 +5,7 @@ This Ansible Playbook automates the setup of Kali machines used penetration test
 |-|-|
 |tools|Installation and configuration of tools.|
 |desktop|Installation of desktop environments (e.g. GNOME).|
-|services|Installation and configuration of services (e.g. SSH server)-|
+|services|Installation and configuration of services (e.g. SSH server).|
 |basic-customization|Setup timezone, keyboard layout and locales|
 |desktop-customization|Customization of installed desktops (e.g. applying GNOME settings).|
 |special-customization|Setup of the shell profile, aliases, host file, etc.|
@@ -57,7 +57,7 @@ Variables will be defined in several location within the playbook:
 
 |Priority|Variable Location|Description|
 |-|-|-|
-|1|Command line param (`--extra-vars`)|Variables can be defined also on command line. These variables will overwrite all variables defined in other locations. Refer to [[doc/Makefile]] for examples.|
+|1|Command line param (`--extra-vars`)|Variables can be defined also on command line. These variables will overwrite all variables defined in other locations. Refer to [Makefile](doc/Makefile.md) for examples.|
 |2|`host_vars`|Variable definitions which will affect only one specific host.|
 |3|`group_vars`|Variable definitions which will a affects a group of hosts (e.g. ***kali* group**). | 
 |4|`role/<role>/default/main.yml`|The purpose of the dafults directories in each role is to setup default values for variables and to ensure, that playbooks runs correctly if no variable is setup somewhere else.|

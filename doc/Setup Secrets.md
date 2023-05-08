@@ -8,7 +8,7 @@ This section describes configuring secrets like SSH keys or VPN configurations w
 mkdir -p roles/secrets0/files/ && ssh-keygen -f roles/secrets0/files/example-key -t rsa -b 4096
 ```
 
-*Key must be <u>only</u> generated, if no SSH hey is available.*
+*Key must be <u>only</u> generated, if no SSH key is available.*
 
 **Step 02 -** Encrypt the SSH keys:
  
