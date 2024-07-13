@@ -222,18 +222,22 @@ https://github.com/dennis6400/kali-setup/archive/refs/tags/v1.0.0.zip
 brew install vagrant
 ```
 
-### Linux
+#### Linux
 
 ```shell
 sudo apt update && sudo apt install vagrant
 ```
+
+### Installation of Vagrant Plugin for VMware
+
+See [here](https://developer.hashicorp.com/vagrant/docs/providers/vmware/installation)!
 
 ### Starting a Kali Test VM 
 
 **Step 01 -** Clone the repository:
 
 ```shell
-git clone git@github.com:dennis6400/kali-setup.git && cd kali-setup
+git clone git@github.com:dennis6400/kali-custom-setup.git && cd kali-custom-setup
 ```
 
 **Step 02 -** Start Kali test VM via vagrant:
@@ -248,16 +252,16 @@ vagrant up --provider=vmware_fusion
 
 The test VM will be started by vagrant and automatically configured by the `provision.sh` script. 
 
-## Stop the Kali Test VM
+### Stop the Kali Test VM
 
 ```shell
-vagrant halt && vagrant destroy -f'
+vagrant halt
 ```
 
-## Delete the Kali Test VM
+### Delete the Kali Test VM
 
 ```shell
-vagrant halt && vagrant destroy -f'
+vagrant halt && vagrant destroy -f
 ```
 
 ## Advanced Usage
