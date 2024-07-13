@@ -1,0 +1,7 @@
+---
+ansible_python_interpreter: python3
+
+# Configure User 
+user: "{{ ansible_user }}"
+group: "{{ user }}"
+home_dir: "/home/{{ user }}"
