@@ -1,5 +1,6 @@
 nohup.out
 *.retry
 *.DS_Store
-*.obsidian
-*.vagrant
+.obsidian/graph.json
+.obsidian/workspace.json
+.vagrant
