@@ -1,6 +1,6 @@
 ---
 - name: Ensure a locale exists
-  ansible.builtin.locale_gen:
+  community.general.locale_gen:
     name: de_DE.UTF-8
     state: present
 
