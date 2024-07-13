@@ -3,7 +3,14 @@
   become: yes
   ansible.builtin.apt:
     update_cache: yes
-  when: install_desktop == "only-gnome" or install_desktop == "all"
+  when: (install_desktop == "only-gnome" or install_desktop == "all") and not apt_cached_updated
+  tags:
+    - install-desktop
+
+- name: Set repositories cache as updated
+  set_fact:
+    apt_cached_updated: yes
+  when: (install_desktop == "only-gnome" or install_desktop == "all") and not apt_cached_updated
   tags:
     - install-desktop
 

@@ -1,10 +1,24 @@
 ---
+- name: Update repositories cache
+  become: yes
+  ansible.builtin.apt:
+    update_cache: yes
+  when: not apt_cached_updated
+  tags:
+    - setup-desktop
+
+- name: Set repositories cache as updated
+  set_fact:
+    apt_cached_updated: yes
+  when: not apt_cached_updated
+  tags:
+    - setup-desktop
+
 - name: Install kali wallpapers
   become: yes
   ansible.builtin.apt:
     name: kali-wallpapers-all
     state: present
-    update_cache: yes
   tags:
     - setup-desktop
 

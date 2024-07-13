@@ -2,6 +2,12 @@
 - name: Update repositories cache
   ansible.builtin.apt:
     update_cache: yes
+  when: not apt_cached_updated
+
+- name: Set repositories cache as updated
+  set_fact:
+    apt_cached_updated: yes
+  when: not apt_cached_updated
 
 - name: Install multiple apt packages
   ansible.builtin.apt:

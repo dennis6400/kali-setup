@@ -1,4 +1,10 @@
 ---
+## 
+# Setup repositories cache
+##
+apt_cached_updated: no
+
+
 ##
 # Setup Desktop(s)
 ##
