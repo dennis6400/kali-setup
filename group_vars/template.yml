@@ -1,10 +1,13 @@
 ---
+ansible_python_interpreter: python3
+
+
 ##
 # Configure User 
 ##
-user: "kali"
-group: "{{ user }}"
-home_dir: "/home/{{ user }}"
+#user: "{{ ansible_user }}"
+#group: "{{ user }}"
+#home_dir: "/home/{{ user }}"
 
 
 ##
@@ -29,12 +32,15 @@ home_dir: "/home/{{ user }}"
 #symlinks:
 #  - { src: "/opt/dirsearch/dirsearch.py", dest: "/usr/local/bin/dirsearch" }   # Add dirsearch to PATH
 
+# Ansible
+install_ansible: no
+
 # Sublime Text & Sublime Merge
 install_sublime_text: no
 install_sublime_merge: no
 
 # Obsidian
-#install_obsidian: yes
+install_obsidian: no
 #obsidian_version: 1.1.16
 
 # Burp Suite
@@ -46,7 +52,7 @@ install_oracle_instant_client: no
 # Tools - Setup Terminator (terminator-config.j2)
 setup_terminator: no
 
-# Setup git (gitconfig.j2)
+# Setup git (gitconfig.j2
 setup_git: no
 
 
@@ -90,7 +96,15 @@ setup_desktop: none
 ##
 # Misc Customization
 ##
-setup_misc: no
+#setup_misc: yes
+
+# Engagement Directory
+#setup_engangement_dir: no
+
+# VMware: Host Directories
+#setup_symlinks_host_dirs: yes     
+#symlinks_host_dirs:
+#  - { host_dir: "/mnt/hgfs/projects", dest: "{{ project_root_dir }}/host" }
 
 
 ##
