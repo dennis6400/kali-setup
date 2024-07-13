@@ -24,19 +24,19 @@ tools:
 skip-tools:
 	ansible-playbook -i ${INVENTORY} --ask-become-pass --skip-tags 'install-apt-tools, install-git-tools, install-further-tools' site.yml
 
-# Install/update Obsidian
+# Install/update only Obsidian
 obsidian:
 	ansible-playbook -i ${INVENTORY} --ask-become-pass -t 'install-obsidian' site.yml
 
-# Install/update Sublime Text & Sublime Merge
+# Install/update only Sublime Text & Sublime Merge
 sublime:
 	ansible-playbook -i ${INVENTORY} --ask-become-pass -t 'install-sublime' site.yml
 
-# Install/update Burp Suite
+# Install/update only Burp Suite
 burpsuite:
 	ansible-playbook -i ${INVENTORY} --ask-become-pass -t 'install-burpsuite' site.yml
 
-# Install/update 1Password
+# Install/update only 1Password
 1password:
 	ansible-playbook -i ${INVENTORY} --ask-become-pass -t 'install-1password' site.yml
 
