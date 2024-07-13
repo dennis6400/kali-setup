@@ -15,3 +15,9 @@ setup_german_locales: no
 # Setup German timezone
 ##
 setup_german_timezone: no
+
+
+##
+# Setup Bluetooth
+##
+setup_bluetooth: no
