@@ -24,6 +24,22 @@ tools:
 skip-tools:
 	ansible-playbook -i ${INVENTORY} --ask-become-pass --skip-tags 'install-apt-tools, install-git-tools, install-further-tools' site.yml
 
+# Install/update Obsidian
+obsidian:
+	ansible-playbook -i ${INVENTORY} --ask-become-pass -t 'install-obsidian' site.yml
+
+# Install/update Sublime Text & Sublime Merge
+sublime:
+	ansible-playbook -i ${INVENTORY} --ask-become-pass -t 'install-sublime' site.yml
+
+# Install/update Burp Suite
+burpsuite:
+	ansible-playbook -i ${INVENTORY} --ask-become-pass -t 'install-burpsuite' site.yml
+
+# Install/update 1Password
+1password:
+	ansible-playbook -i ${INVENTORY} --ask-become-pass -t 'install-1password' site.yml
+
 
 ##
 # Desktop
@@ -40,7 +56,7 @@ desktop:
 # Skip installing and customizing any desktop environment
 skip-desktop:
 	ansible-playbook -i ${INVENTORY} --ask-become-pass --skip-tags 'install-desktop, setup-desktop' --extra-vars "install_desktop=none setup_desktop=none" site.yml
-
+	
 
 ##
 # Basic setup
@@ -84,6 +100,18 @@ secrets:
 # Skip setting up secrets (e.g. SSH, VPN)
 skip-secrets:
 	ansible-playbook -i ${INVENTORY} --ask-become-pass --skip-tags 'setup-secrets' site.yml
+
+# Remove all secrets
+remove-secrets:
+	ansible-playbook -i ${INVENTORY} --ask-become-pass -t 'remove-secrets' --extra-vars "remove_ssh=yes remove_vpn=yes" site.yml
+
+# Remove SSH keys
+remove-ssh:
+	ansible-playbook -i ${INVENTORY} --ask-become-pass -t 'remove-secrets' --extra-vars "remove_ssh=yes" site.yml
+
+# Remove VPN configurations & keys
+remove-vpn:
+	ansible-playbook -i ${INVENTORY} --ask-become-pass -t 'remove-secrets' --extra-vars "remove_vpn=yes" site.yml
 
 
 ##
