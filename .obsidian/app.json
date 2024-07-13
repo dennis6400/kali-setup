@@ -1,0 +1,12 @@
+{
+  "livePreview": false,
+  "alwaysUpdateLinks": true,
+  "defaultViewMode": "preview",
+  "showLineNumber": true,
+  "newFileLocation": "folder",
+  "trashOption": "local",
+  "newFileFolderPath": "_Inbox",
+  "attachmentFolderPath": "./files",
+  "showInlineTitle": false,
+  "useMarkdownLinks": true
+}
