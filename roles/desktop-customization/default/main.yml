@@ -14,3 +14,7 @@ apt_cached_updated: no
 # none       => Skip setting up desktop(s)
 # ----------------------------------------
 setup_desktop: none
+
+setup_gnome_favorite_apps: no 
+setup_gnome_extensions: no
+setup_gnome_settings: no
