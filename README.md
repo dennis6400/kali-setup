@@ -1,6 +1,6 @@
 ---
 creation date: 2024-07-06 20:10:45
-last modified date: 2024-07-13 23:52:19
+last modified date: 2024-07-14 01:14:30
 ---
 
 # Kali Setup
@@ -128,6 +128,20 @@ ssh-copy-id -i ~/.ssh/<private SSH key> kali@192.168.xx.xx
 ssh-copy-id -i ~/.ssh/<private SSH key> kali@192.169.xx.xx
 ```
 
+### Setup SSH server on the remote server(s)
+
+It is recommend making the SSH server on the remote sever(s) bootsafe. Connect to the remote server(s) and executing the following commands on each remote server:
+
+```shell
+sudo systemctl enable ssh.service && sudo systemctl start ssh.service 
+```
+
+For checking the satus of the respective SSH server, use the following command:
+
+```shell
+systemctl status ssh.service 
+```
+
 ###  Downloading & Running the Playbook 
 
 **Step 01 -** Clone the repository:
@@ -196,6 +210,54 @@ git clone --depth 1 --branch v1.0.0 git@github.com:dennis6400/kali-setup.git
 
 ```
 https://github.com/dennis6400/kali-setup/archive/refs/tags/v1.0.0.zip
+```
+
+## Vagrant
+
+### Installation of Vagrant
+
+#### MacOS
+
+```shell
+brew install vagrant
+```
+
+### Linux
+
+```shell
+sudo apt update && sudo apt install vagrant
+```
+
+### Starting a Kali Test VM 
+
+**Step 01 -** Clone the repository:
+
+```shell
+git clone git@github.com:dennis6400/kali-setup.git && cd kali-setup
+```
+
+**Step 02 -** Start Kali test VM via vagrant:
+
+```shell
+vagrant up --provider=virtualbox
+```
+
+```shell
+vagrant up --provider=vmware_fusion
+```
+
+The test VM will be started by vagrant and automatically configured by the `provision.sh` script. 
+
+## Stop the Kali Test VM
+
+```shell
+vagrant halt && vagrant destroy -f'
+```
+
+## Delete the Kali Test VM
+
+```shell
+vagrant halt && vagrant destroy -f'
 ```
 
 ## Advanced Usage
