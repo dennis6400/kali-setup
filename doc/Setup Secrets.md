@@ -1,11 +1,18 @@
-# Setup Secrets
+---
+creation date: 2024-07-06 20:10:45
+last modified date: 2024-07-13 23:59:03
+---
+
+# [Setup Secrets](Setup%20Secrets.md)
+
 This section describes configuring secrets like SSH keys or VPN configurations within the playbook**. Although the secrets will be stored encrypted in the playbook, it is <u>highly recommended</u> not to publish the secrests in a public Git repository.** It is recommend to fork this repository, customize the pre-configured setting and use  the playbook privately for yourself. 
 
 ## Setup SSH Keys
+
 **(optional) Step 01 -** Generate SSH keys:
 
 ```shell
-mkdir -p roles/secrets0/files/ && ssh-keygen -f roles/secrets0/files/example-key -t rsa -b 4096
+mkdir -p roles/secrets/files/ && ssh-keygen -f roles/secrets0/files/example-key -t rsa -b 4096
 ```
 
 *Key must be <u>only</u> generated, if no SSH key is available.*
@@ -36,10 +43,11 @@ ssh_keys:
 **Step 04 -** Now the SSH keys must be deployed: 
 
 ```shell
-. profiles/kali-default-hosts.profile && make secrets
+. profiles/default-hosts.profile && make secrets
 ```
 
 ## Setup VPN Configurations
+
 **Step 01 -** Create a new VPN configuration directory:
 
 ```shell
@@ -79,10 +87,11 @@ vpn_configs:
 **Step 05 -** Now the SSH keys must be deployed: 
 
 ```shell
-. profiles/kali-default-hosts.profile && make secrets
+. profiles/default-hosts.profile && make secrets
 ```
 
 ## Decrypt SSH Keys & VPN Configurations
+
 Decrypt example SSH keys:
 
 ```shell
@@ -96,6 +105,7 @@ ansible-vault decrypt roles/secrets/templates/vpn-example/example-vpn.config.ovp
 ```
 
 ## View SSH Keys & VPN Configurations
+
 View example SSH keys:
 
 ```shell
@@ -113,4 +123,5 @@ ansible-vault view roles/secrets/templates/vpn-example/example-vpn.config.ovpn
 ```
 
 ## References
+
 - [Protecting sensitive data with Ansible vault](https://docs.ansible.com/ansible/latest/vault_guide/index.html#protecting-sensitive-data-with-ansible-vault)

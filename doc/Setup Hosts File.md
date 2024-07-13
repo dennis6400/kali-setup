@@ -1,4 +1,10 @@
-# Setup Hosts File
+---
+creation date: 2024-07-06 20:10:45
+last modified date: 2024-07-13 23:59:23
+---
+
+# [Setup Hosts File](Setup%20Hosts%20File.md)
+
 **Step 01 -** Create a custom hosts file:
 
 ```shell
@@ -34,7 +40,7 @@ hosts_template: "hosts-custom.j2"
 **Step 04 -** Now the custom hosts file  must be deployed: 
 
 ```shell
-. profiles/kali-default-hosts.profile && make hosts
+. profiles/default-hosts.profile && make hosts
 ```
 
 ---

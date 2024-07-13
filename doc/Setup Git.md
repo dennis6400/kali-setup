@@ -1,4 +1,10 @@
-# Setup Git
+---
+creation date: 2024-07-06 20:10:45
+last modified date: 2024-07-13 23:59:53
+---
+
+# [Setup Git](Setup%20Git.md)
+
 **Step 01 -** Create a custom configuration file for git:
 
 ```shell
@@ -33,7 +39,7 @@ git_template: "gitconfig.j2"
 **Step 04 -** Now the custom hosts file  must be deployed: 
 
 ```shell
-. profiles/kali-default-hosts.profile && make hosts
+. profiles/default-hosts.profile && make hosts
 ```
 
 ---

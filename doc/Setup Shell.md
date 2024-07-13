@@ -1,4 +1,10 @@
-# Setup Shell
+---
+creation date: 2024-07-06 20:10:45
+last modified date: 2024-07-13 23:57:56
+---
+
+# [Setup Shell](Setup%20Shell.md)
+
 With the playbook a **bash** can be configured automatically. The playbook contains examples for a bash configuration: 
 - Bash profie: `roles/special-customization/templates/bashrc-example.j2`
 - Bash aliases: `roles/special-customization/templates/bash_aliases-example.j2`
@@ -43,7 +49,7 @@ shell_alias_files:
 **Step 04 -** Now the custom bash configuration must be deployed: 
 
 ```shell
-. profiles/kali-default-hosts.profile && make shell
+. profiles/default-hosts.profile && make shell
 ```
 
 ---

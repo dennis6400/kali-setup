@@ -1,4 +1,10 @@
-# Important Params
+---
+creation date: 2024-07-06 20:10:45
+last modified date: 2024-07-14 00:01:34
+---
+
+# [Important Params](Important%20Params.md)
+
 |Param|Description|
 |-|-|
 |`-i <inventory file>`|Define invenrory file (e.g. `-i development`)|
