@@ -1,0 +1,20 @@
+---
+- name: Remove previous Eicar files
+  ansible.builtin.file:
+    path: "{{ eicar_dest }}"
+    state: absent
+
+- name: Create Eicar directory
+  ansible.builtin.file:
+    path: "{{ eicar_dest }}"
+    state: directory
+
+- name: Download Eicar files
+  ansible.builtin.get_url:
+    url: "https://secure.eicar.org/{{ item }}"
+    dest: "{{ eicar_dest }}/{{ item }}"
+  loop:
+    - eicar.com
+    - eicar.com.txt
+    - eicar_com.zip
+    - eicarcom2.zip

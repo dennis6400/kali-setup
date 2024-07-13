@@ -57,6 +57,13 @@ setup_cron: no
 
 
 ##
+# Setup Eicar files
+##
+setup_eicar: no
+eicar_dest: "{{ home_dir }}/Documents/eicar"
+
+
+##
 # Misc Customization
 ##
 setup_misc: no
@@ -70,6 +77,3 @@ setup_engangement_dir: no
 
 # VMware: Host Directories
 setup_symlinks_host_dirs: no
-
-# Private Utils
-private_utils: no

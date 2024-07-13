@@ -3,7 +3,6 @@
     setup_sublime_text: "{{ install_sublime_text }}"
     setup_oracle_instant_client: "{{ install_oracle_instant_client }}"
     setup_vmware: "{{ vmware_vm }}"
-    setup_private_utils: "{{ private_utils }}"
   tags:
     - setup-shell-profile
     - setup-shell-aliases
@@ -39,6 +38,10 @@
   become: yes
   ansible.builtin.import_tasks: sudoers.yml
   when: "setup_sudoers and setup_vmware"
+
+- name: Setup Eicar folder
+  ansible.builtin.import_tasks: eicar.yml
+  when: setup_eicar
 
 - name: Miscellaneous customization 
   ansible.builtin.import_tasks: misc.yml
