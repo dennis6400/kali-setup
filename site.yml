@@ -1,6 +1,6 @@
 ---
 - name: Run the playbook tasks on the kali
-  hosts: kali-default, kali-custom, kali-engagement
+  hosts: kali-default
   gather_facts: yes
   roles:
     - tools
