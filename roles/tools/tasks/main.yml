@@ -3,9 +3,12 @@
 # Requirements
 ##
 - set_fact:
-    architecture: "x86_64"
-    #architecture: "arm64"
-    os_family: "Debian"
+    architecture: "{{ ansible_architecture }}"
+    os_family: "{{ ansible_os_family }}"
+  tags:
+    - install-further-tools
+    - install-obsidian
+    - install-1password
 
 
 ##
@@ -17,6 +20,14 @@
   when: apt_packages is defined
   tags:
     - install-apt-tools
+
+- name: Install Ansible
+  become: yes
+  ansible.builtin.import_tasks: ansible.yml
+  when: install_ansible
+  tags:
+    - install-apt-tools
+    - install-ansible
 
 - name: Install tools from GitHub
   become: yes
@@ -31,22 +42,29 @@
   when: install_sublime_text or install_sublime_merge
   tags:
     - install-apt-tools
+    - install-sublime
 
 - name: Install Obsidian (Debian package)
   become: yes
-  ansible.builtin.import_tasks: obsidian-debian.yml
+  ansible.builtin.import_tasks: deb-package.yml
+  vars:
+    url: "https://github.com/obsidianmd/obsidian-releases/releases/download/v{{ obsidian_version }}/obsidian_{{ obsidian_version }}_amd64.deb"
+    package_name: "obsidian"
+    deb_package: "obsidian_{{ obsidian_version }}_amd64.deb"
   when: install_obsidian and os_family == "Debian" and architecture == "x86_64"
   tags:
     - install-apt-tools
+    - install-obsidian
 
 - name: Install Obsidian (AppImage) for ARM architecture
   become: yes
   ansible.builtin.import_tasks: obsidian-appimage.yml
   vars:
     obsidian_appimage_file: "Obsidian-{{ obsidian_version }}-arm64.AppImage"
-  when: install_obsidian and os_family == "Debian" and architecture == "arm64"
+  when: install_obsidian and os_family == "Debian" and (architecture == "arm64" or architecture == "aarch64")
   tags:
     - install-further-tools
+    - install-obsidian
 
 - name: Install Oracle instant client
   become: yes
@@ -60,15 +78,65 @@
   tags:
     - install-further-tools
 
-- name: Install Burpsuite Professional
+#- name: Install Burpsuite Professional
+#  become: yes
+#  ansible.builtin.import_tasks: burpsuite.yml
+#  when: install_burpsuite
+#  tags:
+#    - install-further-tools
+#    - install-burpsuite
+
+- name: Install 1Password (Debian package)
   become: yes
-  ansible.builtin.import_tasks: burpsuite.yml
-  when: install_burpsuite
+  ansible.builtin.import_tasks: deb-package.yml
+  vars:
+    url: "https://downloads.1password.com/linux/debian/amd64/stable/1password-latest.deb"
+    package_name: "1password"
+    deb_package: "1password-latest.deb"
+  when: install_1password and os_family == "Debian" and architecture == "x86_64"
   tags:
     - install-further-tools
+    - install-1password
+
+- name: Install 1Password (ARM package)
+  become: yes
+  ansible.builtin.import_tasks: 1password-arm.yml
+  when: install_1password and os_family == "Debian" and (architecture == "arm64" or architecture == "aarch64")
+  tags:
+    - install-further-tools
+    - install-1password
+
+- name: Build libsecret
+  become: yes
+  community.general.make:
+    chdir: /usr/share/doc/git/contrib/credential/libsecret
+
+- name: Install libu2f-udev (see https://www.petergirnus.com/blog/how-to-install-google-chrome-on-debian-linux)
+  become: yes
+  ansible.builtin.import_tasks: deb-package.yml
+  vars:
+    url: "http://archive.ubuntu.com/ubuntu/pool/main/libu/libu2f-host/libu2f-udev_1.1.4-1_all.deb"
+    package_name: "libu2f-udev"
+    deb_package: "libu2f-udev_1.1.4-1_all.deb"
+  when: install_chrome and os_family == "Debian" and architecture == "x86_64"
+  tags:
+    - install-further-tools
+    - install-chrome
+
+- name: Install Chrome (Debian package)
+  become: yes
+  ansible.builtin.import_tasks: deb-package.yml
+  vars:
+    url: "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
+    package_name: "google-chrome"
+    deb_package: "google-chrome-stable_current_amd64.deb"
+  when: install_chrome and os_family == "Debian" and architecture == "x86_64"
+  tags:
+    - install-further-tools
+    - install-chrome
 
 
-###
+##
 # Setup links
 ##
 - name: Create symbolic links
@@ -94,7 +162,7 @@
 - name: Rollout configurations
   ansible.builtin.import_tasks: conf.yml
   vars:
-    path: "/home/kali/.config/terminator"
+    path: "{{ home_dir }}/.config/terminator"
     template: "{{ terminator_template }}"
     file_name: "config"
   when: "setup_terminator and ('terminator' in ansible_facts.packages)"
@@ -102,7 +170,7 @@
 - name: Rollout configurations
   ansible.builtin.import_tasks: conf.yml
   vars:
-    path: "/home/kali"
+    path: "{{ home_dir }}"
     template: "{{ git_template}}"
     file_name: ".gitconfig"
   when: "setup_git and ('git' in ansible_facts.packages)"

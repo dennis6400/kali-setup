@@ -6,6 +6,12 @@ apt_cached_updated: no
 
 
 ##
+# Ansible
+##
+install_ansible: no
+
+
+##
 # Sublime Text & Sublime Merge
 ##
 install_sublime_text: no
@@ -15,9 +21,9 @@ install_sublime_merge: no
 ##
 # Obsidian
 ##
-install_obsidian: yes
+install_obsidian: no
 obsidian_appimage_dest: "/opt/obsidian"
-obsidian_version: 1.1.16
+obsidian_version: 1.6.3
 
 
 ##
@@ -33,6 +39,22 @@ oracle_instant_client_version: "21.1.0.0.0"
 # Burp Suite
 ##
 install_burpsuite: no
+burpsuite_edition: pro
+burpsuite_installer_version: "2024.1.1.6"
+
+
+##
+# 1Password
+##
+install_1password: no
+onepassword_arm_dest: "/opt/1Password"
+onepassword_arm_version: "8.10.36"
+
+
+##
+# Chrome
+##
+install_chrome: no
 
 
 ##

@@ -1,0 +1,19 @@
+---
+- name: "{{ package_name }} - Download the .deb package"
+  ansible.builtin.get_url:
+    url: "{{ url }}"
+    dest: "/tmp"
+
+- name: "{{ package_name }} - Remove previous installations"
+  ansible.builtin.apt:
+    name: "{{ package_name }}"
+    state: absent
+
+- name: "{{ package_name }} - Install the .deb package"
+  ansible.builtin.apt:
+    deb: "/tmp/{{ deb_package }}"
+
+- name: "{{ package_name }} - Remove the .deb package"
+  ansible.builtin.file:
+    path: "/tmp/{{ deb_package }}"
+    state: absent

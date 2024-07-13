@@ -1,0 +1,27 @@
+---
+- name: Ansible - Install some prerequisites
+  apt: 
+    name: software-properties-common
+
+- name: Ansible - Install key for Ansible
+  ansible.builtin.apt_key:
+    url: https://keyserver.ubuntu.com/pks/lookup?fingerprint=on&op=get&search=0x6125E2A8C77F2818FB7BD15B93C4A3FD7BB9C367
+    state: present
+
+- name: Ansible - Add specified repositories into sources list using specified filename
+  ansible.builtin.apt_repository:
+    repo: deb http://ppa.launchpad.net/ansible/ansible/ubuntu jammy main
+    state: present
+    filename: ansible
+
+- name: Ansible - Update repositories cache
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: Set repositories cache as updated
+  set_fact:
+    apt_cached_updated: yes
+
+- name: Install Ansible
+  apt: 
+    name: ansible
