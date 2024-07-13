@@ -19,3 +19,10 @@
   when: setup_german_timezone
   tags:
     - basic-setup
+
+- name: Setup bluetooth
+  become: yes
+  ansible.builtin.import_tasks: bluetooth.yml
+  when: setup_bluetooth
+  tags:
+    - basic-setup

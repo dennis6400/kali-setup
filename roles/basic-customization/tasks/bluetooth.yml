@@ -1,0 +1,6 @@
+---
+- name: Make sure the bluetooth service is running and enabled
+  ansible.builtin.systemd_service:
+    name: bluetooth
+    state: started
+    enabled: true
