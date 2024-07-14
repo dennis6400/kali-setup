@@ -110,6 +110,7 @@
   become: yes
   community.general.make:
     chdir: /usr/share/doc/git/contrib/credential/libsecret
+  ignore_errors: true
 
 - name: Install libu2f-udev (see https://www.petergirnus.com/blog/how-to-install-google-chrome-on-debian-linux)
   become: yes
